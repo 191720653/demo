@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Runner implements ApplicationRunner {
+public class RabbitMQRunner implements ApplicationRunner {
 
     @Autowired
     private Producer producer;
