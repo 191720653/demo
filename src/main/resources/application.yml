@@ -8,5 +8,17 @@ spring:
     password: guest
     virtual-host: demo
     publisher-confirms: true
+  kafka:
+    bootstrap-servers: 192.168.3.4:9092,192.168.3.5:9092,192.168.3.6:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: TEST_GROUP
+      # 如果为true，则消费者的偏移量将在后台定期提交，为false，spring也会帮我们进行人工提交
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 server:
   port: 8080

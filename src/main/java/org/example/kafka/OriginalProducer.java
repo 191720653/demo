@@ -7,6 +7,9 @@ import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
 
+/**
+ * 官方jar实现生产者
+ */
 public class OriginalProducer implements Runnable {
 
     private static final String TOPIC = "TEST_TOPIC";
