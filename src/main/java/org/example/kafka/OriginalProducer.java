@@ -54,7 +54,7 @@ public class OriginalProducer implements Runnable {
                         System.out.println("发送消息异常！");
                     }
                     if (recordMetadata != null) {
-                        // topic 下可以有多个分区，每个分区有自己的 offset
+                        // topic 下可以有多个分区，每个分区的消费者维护一个 offset
                         System.out.println("消息发送成功：" + recordMetadata.partition() + "-" + recordMetadata.offset());
                     }
                 });

@@ -87,7 +87,7 @@ public class RabbitMQConfig {
      */
     public static final String TOPIC_EXCHANGE = "TOPIC_EXCHANGE";
     public static final String TOPIC_LOG_QUEUE = "TOPIC_LOG_QUEUE";
-    public static final String TOPIC_lOG_INFO_QUEUE = "TOPIC_lOG_INFO_QUEUE";
+    public static final String TOPIC_lOG_INFO_QUEUE = "TOPIC_LOG_INFO_QUEUE";
     public static final String TOPIC_ROUTING_KEY_ALL_LOG = "TOPIC_ROUTING_KEY.#";
     public static final String TOPIC_ROUTING_KEY_INFO_LOG = "TOPIC_ROUTING_KEY.INFO.*";
 
@@ -161,7 +161,7 @@ public class RabbitMQConfig {
 
     /**
      * 死信交换机，创建队列的时候设置的附带交换机，当队列的消息发送失败后会交给私死信交换机处理
-     * 1、消息被拒绝（basic.reject 或者 basic.nack），并且requeue为false
+     * 1、消息被拒绝（basic.reject 或者 basic.nack），并且requeue为false（不重新放回队列）
      * 2、消息的过期时间到了
      * 3、队列长度超过限制了
      * 可以利用消息过期时间来实现延时队列
@@ -182,11 +182,11 @@ public class RabbitMQConfig {
     @Bean
     public Queue timeoutQueue() {
         Map<String,Object> map = new HashMap<>();
-        // 设置消息的过期时间 单位毫秒
+        // 设置消息的过期时间，单位毫秒
         map.put(TIME_OUT_KEY_NAME, TIME_OUT_MILLS);
-        // 设置附带的死信交换机
+        // 设置死信交换机
         map.put(DEAD_EXCHANGE_KEY_NAME, DEAD_EXCHANGE);
-        // 指定死信交换机的路由建
+        // 指定死信交换机的路由
         map.put(DEAD_ROUTING_KEY_NAME, DEAD_ROUTING_KEY);
         // 名字，是否持久化，是否仅声明队列的连接可见（其它连接不可见，断开连接后队列自动删除），是否自动删除（所有消费者断开连接后自动删除）
         return new Queue(TIME_OUT_QUEUE, true, false, false, map);
