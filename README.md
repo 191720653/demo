@@ -1,6 +1,6 @@
 # demo
 
-RabbitMQ demo
+RabbitMQ Demo
 
 Kafka Demo
 
